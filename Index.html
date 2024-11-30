@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Football Session Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    form {
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      max-width: 400px;
+      background-color: #f9f9f9;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>Secure Your Spot</h1>
+  <p>Enter your name and pay to confirm your booking for the football session.</p>
+  <form id="bookingForm">
+    <input type="text" id="name" name="name" placeholder="Enter your name" required />
+    <button type="submit">Pay and Secure Spot</button>
+  </form>
+  <p id="confirmationMessage" style="color: green; font-weight: bold;"></p>
+
+  <script>
+    document.getElementById("bookingForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent form submission refresh
+      
+      const name = document.getElementById("name").value;
+      if (name.trim() === "") {
+        alert("Please enter your name.");
+        return;
+      }
+
+      // Example: Bank Transfer Link (replace with your payment link)
+      const bankTransferLink = `https://monzo.me/elyasmohamed6/6.00?d=Football%20Payment/transfer?amount=10&reference=${encodeURIComponent(name)}`;
+
+      // Display confirmation message
+      document.getElementById("confirmationMessage").textContent = `Thank you, ${name}! Click the link below to pay:`;
+
+      // Generate dynamic payment link
+      const paymentLink = document.createElement("a");
+      paymentLink.href = bankTransferLink;
+      paymentLink.textContent = "Pay Now";
+      paymentLink.style.display = "block";
+      paymentLink.style.marginTop = "10px";
+      paymentLink.style.color = "#007bff";
+      paymentLink.style.textDecoration = "none";
+      paymentLink.style.fontSize = "16px";
+
+      document.getElementById("confirmationMessage").appendChild(paymentLink);
+    });
+  </script>
+</body>
+</html>
